@@ -1,0 +1,25 @@
+pipeline {
+    agent none
+    
+    stages {
+        stage('Build') {
+         agent {
+           docker { image 'openjdk:11-jdk-slim}
+         }
+            steps {
+                // Compile the Java class
+                sh 'javac HelloWorld.java'
+            }
+        }
+        stage('Run') {
+          agent {
+           docker { image 'openjdk:11-jdk-slim}
+         }
+            steps {
+                // Execute the Java class
+                sh 'java HelloWorld'
+            }
+        }
+    }
+}
+
